@@ -61,7 +61,7 @@ async function createIssue(issue) {
   return result.lastID;
 }
 
-async function seedDatabase(reset = true) {
+async function runSeed(reset = true) {
   await initDb();
   if (reset) await resetTables();
 
@@ -350,7 +350,7 @@ async function seedDatabase(reset = true) {
 }
 
 if (require.main === module) {
-  seedDatabase(true)
+  runSeed(true)
     .then(() => {
       console.log("Seeded CivicBridge database.");
       process.exit(0);
@@ -361,4 +361,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { seedDatabase };
+module.exports = { runSeed };

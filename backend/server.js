@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { initDb } = require("./db");
-const { seedDatabase } = require("./seed");
+const { runSeed } = require("./seed");
 
 const authRoutes = require("./routes/auth");
 const issueRoutes = require("./routes/issues");
@@ -21,6 +21,19 @@ app.get("/api/health", (_req, res) => {
   res.json({ ok: true, name: "CivicBridge API" });
 });
 
+app.get("/api/seed", async (req, res) => {
+  if (req.query.key !== "civicbridge123") {
+    return res.status(401).json({ error: "unauthorized" });
+  }
+
+  try {
+    await runSeed(true);
+    return res.json({ success: true });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/issues", issueRoutes);
 app.use("/api/matches", matchRoutes);
@@ -29,7 +42,7 @@ app.use("/api/donations", donationRoutes);
 
 async function bootstrap() {
   await initDb();
-  await seedDatabase(false);
+  await runSeed(false);
   app.listen(PORT, () => {
     console.log(`CivicBridge backend running on http://localhost:${PORT}`);
   });
