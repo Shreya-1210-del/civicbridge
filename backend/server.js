@@ -1,5 +1,5 @@
+
 const express = require("express");
-const cors = require("cors");
 const path = require("path");
 const { initDb } = require("./db");
 const { runSeed } = require("./seed");
@@ -13,18 +13,21 @@ const donationRoutes = require("./routes/donations");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.use(cors());
-app.use(
-  cors({
-    origin: ["https://civicbridge-frontend.vercel.app", "http://localhost:5173"],
-    credentials: true
-  })
-);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.get("/api/health", (_req, res) => {
+  res.json({ ok: true, name: "CivicBridge API" });
+});
 
 app.get("/api/seed", async (req, res) => {
   if (req.query.key !== "civicbridge123") {
