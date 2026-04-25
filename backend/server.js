@@ -67,7 +67,7 @@ function logRegisteredRoutes() {
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  await runSeed(false);
+  runSeed(false);
   app.listen(PORT, () => {
     console.log(`CivicBridge backend running on http://localhost:${PORT}`);
     logRegisteredRoutes();
