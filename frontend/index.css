@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 32rem),
+    linear-gradient(180deg, #f0fdf4 0%, #ffffff 45%, #ecfeff 100%);
+  color: #063f31;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+::selection {
+  background: #f59e0b;
+  color: #064e3b;
+}
+
+.page-enter {
+  animation: pageEnter 0.45s ease both;
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 55px rgba(6, 78, 59, 0.12);
+}
+
+.hero-mesh {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.34), transparent 22rem),
+    radial-gradient(circle at 88% 18%, rgba(59, 130, 246, 0.28), transparent 24rem),
+    linear-gradient(135deg, #064e3b 0%, #1a6b3c 47%, #0f766e 100%);
+}
+
+.soft-card {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(26, 107, 60, 0.12);
+  box-shadow: 0 20px 60px rgba(6, 78, 59, 0.12);
+}
+
+.lift-card {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.lift-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 70px rgba(6, 78, 59, 0.18);
+  border-color: rgba(26, 107, 60, 0.28);
+}
+
+.brand-button {
+  background: linear-gradient(135deg, #1a6b3c, #0f766e);
+  box-shadow: 0 16px 32px rgba(26, 107, 60, 0.24);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.brand-button:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.08);
+  box-shadow: 0 20px 44px rgba(26, 107, 60, 0.28);
+}
+
+.amber-button {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  box-shadow: 0 16px 32px rgba(245, 158, 11, 0.24);
+}
+
+.field {
+  border: 1px solid rgba(26, 107, 60, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.field:focus {
+  border-color: #1a6b3c;
+  box-shadow: 0 0 0 4px rgba(26, 107, 60, 0.13);
+  transform: translateY(-1px);
+}
+
+.floating-label {
+  position: relative;
+}
+
+.floating-label span {
+  position: absolute;
+  left: 14px;
+  top: -9px;
+  background: white;
+  padding: 0 6px;
+  color: #1a6b3c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pulse-critical {
+  animation: pulseCritical 1.4s ease-out infinite;
+}
+
+.confetti {
+  background-image:
+    radial-gradient(circle, #f59e0b 0 3px, transparent 4px),
+    radial-gradient(circle, #3b82f6 0 3px, transparent 4px),
+    radial-gradient(circle, #1a6b3c 0 3px, transparent 4px);
+  background-size: 42px 42px, 54px 54px, 64px 64px;
+  animation: confettiDrop 1.4s linear infinite;
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 4px solid rgba(26, 107, 60, 0.14);
+  border-top-color: #1a6b3c;
+  border-radius: 999px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseCritical {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes confettiDrop {
+  from {
+    background-position: 0 0, 18px 0, 8px 0;
+  }
+  to {
+    background-position: 0 84px, 18px 108px, 8px 128px;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
